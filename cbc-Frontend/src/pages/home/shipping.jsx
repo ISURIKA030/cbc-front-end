@@ -62,3 +62,32 @@ export default function ShippingPage() {
           return;
         }
 
+        axios
+        .post(
+          import.meta.env.VITE_BACKEND_URL + "/api/orders",
+          {
+            orderedItems: cart,
+            name,
+            address,
+            phone,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        )
+
+        .then((res) => {
+            toast.success("Order placed successfully!");
+            navigate("/orders");
+          })
+          .catch((err) => {
+            toast.error("Failed to place order. Please try again.");
+            console.error(err);
+          });
+      }
+    
+      if (!cart) {
+        return null;
+      }
