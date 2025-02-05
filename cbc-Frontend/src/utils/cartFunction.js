@@ -7,4 +7,27 @@ export function loadCart() {
     }
   }
 
+  export function addToCart(productId, qty){
+    const cart = loadCart()
   
+    const index = cart.findIndex(
+      (item)=>{
+        return item.productId==productId
+      }
+    )
+    console.log(index)
+    if(index==-1){
+      cart.push(
+        {productId, qty}
+      )
+    }else{
+  
+      const newQty = cart[index].qty + qty
+      if(newQty<=0){
+        cart.splice(index,1)
+      }else{
+        cart[index].qty = newQty
+      }
+    }
+    saveCart(cart)
+  }
