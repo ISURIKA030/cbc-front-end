@@ -31,3 +31,7 @@ export default function ProductOverview() {
         });
     }, []);
   
+    function onAddtoCartClick() {
+        addToCart(product.productId, 1);
+        toast.success(product.productId + " Added to cart");
+      }
