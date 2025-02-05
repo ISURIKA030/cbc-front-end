@@ -37,4 +37,19 @@ export default function ShippingPage() {
         });
     }, [cart, navigate]);
 
-    
+    function validateInputs() {
+        if (!name.trim()) {
+          toast.error("Please enter your name.");
+          return false;
+        }
+        if (!address.trim()) {
+          toast.error("Please enter your address.");
+          return false;
+        }
+        if (!phone.trim() || !/^\d{10}$/.test(phone)) {
+          toast.error("Please enter a valid 10-digit phone number.");
+          return false;
+        }
+        return true;
+      }
+
