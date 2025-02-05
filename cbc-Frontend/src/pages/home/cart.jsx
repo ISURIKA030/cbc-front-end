@@ -34,3 +34,42 @@ export default function Cart() {
         });    
       }
     
+      return (
+        <div className="w-full h-full  overflow-y-scroll flex  flex-col items-end">
+          <table className="w-full">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Product Name</th>
+                <th>Product ID</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            {cart.map((item) => {
+              return (
+                <CartCard
+                  key={item.productId}
+                  productId={item.productId}
+                  qty={item.qty}
+                />
+              );
+            })}
+          </table>
+          <h1 className="text-3xl font-bold text-accent">
+            Total: LKR. {labeledTotal.toFixed(2)}
+          </h1>
+          <h1 className="text-3xl font-bold text-accent">
+            Discount: LKR. {(labeledTotal - total).toFixed(2)}
+          </h1>
+          <h1 className="text-3xl font-bold text-accent">
+            Grand Total: LKR. {total}
+          </h1>
+    
+          <button onClick={onOrderCheckOutClick} className="bg-accent hover:bg-accent-light text-white p-2 rounded-lg w-[300px]">
+            Checkout
+          </button>
+        </div>
+      );
+    }
