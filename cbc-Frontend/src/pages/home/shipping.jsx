@@ -53,3 +53,12 @@ export default function ShippingPage() {
         return true;
       }
 
+      function createOrder() {
+        if (!validateInputs()) return;
+    
+        const token = localStorage.getItem("token");
+        if (!token) {
+          toast.error("You must be logged in to place an order.");
+          return;
+        }
+
