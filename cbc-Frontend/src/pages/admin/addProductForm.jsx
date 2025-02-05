@@ -15,4 +15,30 @@ export default function AddProductForm() {
     const [description, setDescription] = useState("");
     const navigate = useNavigate()
 
+    async function handleSubmit(){
+        const altNames = alternativeNames.split(",")
+        
+        const promisesArray = []
+    
+        for(let i=0; i<imageFiles.length; i++){
+          promisesArray[i] = uploadMediaToSupabase(imageFiles[i])
+        }
+
+        const imgUrls = await Promise.all(promisesArray)
+
+        const product = {
+          productId : productId,
+          productName : productName,
+          altNames : altNames,
+          images : imgUrls,
+          price : price,
+          lastPrice : lastPrice,
+          stock : stock,
+          description : description
+        }
+
+    
+    
+    
+    
     
