@@ -14,3 +14,5 @@ export default function AddProductForm() {
     const [stock, setStock] = useState("");
     const [description, setDescription] = useState("");
     const navigate = useNavigate()
+
+    
