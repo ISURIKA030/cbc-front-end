@@ -26,4 +26,11 @@ export default function Cart() {
         });
     }, []);
 
+    function onOrderCheckOutClick() {
+        navigate("/shipping" ,{
+          state: {
+            items : loadCart()
+          }
+        });    
+      }
     
