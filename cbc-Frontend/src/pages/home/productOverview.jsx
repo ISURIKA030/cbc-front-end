@@ -35,3 +35,16 @@ export default function ProductOverview() {
         addToCart(product.productId, 1);
         toast.success(product.productId + " Added to cart");
       }
+
+      function onBuyNowClick(){
+        navigate("/shipping",{
+          state:{
+            items: [
+              {
+                productId: product.productId,
+                qty: 1
+              }
+            ]
+          }
+        })
+      }
