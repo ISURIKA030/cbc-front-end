@@ -4,3 +4,37 @@ import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+export default function ShippingPage() {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const cart = location.state?.items;
+    const [total, setTotal] = useState(0);
+    const [labeledTotal, setLabeledTotal] = useState(0);
+    const [name, setName] = useState("");
+    const [address, setAddress] = useState("");
+    const [phone, setPhone] = useState("");
+  
+    useEffect(() => {
+      if (!cart) {
+        toast.error("No items received");
+        navigate("/cart");
+        return;
+      }
+  
+      axios
+        .post(import.meta.env.VITE_BACKEND_URL + "/api/orders/quote", {
+          orderedItems: cart,
+        })
+        .then((res) => {
+          if (res.data.total != null) {
+            setTotal(res.data.total);
+            setLabeledTotal(res.data.labeledTotal);
+          }
+        })
+        .catch((err) => {
+          toast.error("Failed to fetch order quote. Please try again.");
+          console.error(err);
+        });
+    }, [cart, navigate]);
+
+    
